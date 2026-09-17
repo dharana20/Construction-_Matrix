@@ -11,6 +11,12 @@ export default function InputPanel({ inputs, onChangeInput, onSelectBrand }) {
 
   const isInfra = STRUCTURE_TYPES[inputs.structureType]?.category === 'infrastructure';
 
+  // Derived values for live display
+  const unitFactor = AREA_UNITS[inputs.unit]?.factor || 1;
+  const plotAreaInSqFt = inputs.plotArea * unitFactor;
+  const builtUpPerFloor = Math.round(plotAreaInSqFt * ((inputs.builtupCoverage || 75) / 100));
+  const totalBuiltUpArea = Math.round(builtUpPerFloor * (inputs.floors || 1));
+
   return (
     <div className="glass-panel p-6 sm:p-8 mb-10 sm:mb-12 border-slate-700/60 shadow-2xl">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-6 border-b border-slate-700/60 gap-3">
@@ -92,7 +98,7 @@ export default function InputPanel({ inputs, onChangeInput, onSelectBrand }) {
               <span className="flex items-center gap-2">
                 <Maximize2 className="w-4 h-4 text-cyan-400" /> {isInfra ? 'Bridge Deck Span Area' : 'Plot & Builtup Area'}
               </span>
-              <span className="text-cyan-400 font-extrabold text-sm">{inputs.plotArea} {inputs.unitSymbol}</span>
+              <span className="text-cyan-400 font-extrabold text-sm">{inputs.plotArea} {AREA_UNITS[inputs.unit]?.symbol || 'sq ft'}</span>
             </label>
             
             <div className="flex gap-2.5 mb-4">
@@ -121,7 +127,7 @@ export default function InputPanel({ inputs, onChangeInput, onSelectBrand }) {
             <div className="mt-2">
               <div className="flex justify-between text-xs text-slate-400 mb-1.5 font-medium">
                 <span>Slab Builtup Coverage</span>
-                <span className="text-cyan-300 font-bold">{inputs.builtupCoverage}% ({inputs.builtUpPerFloor} sq ft/span)</span>
+                <span className="text-cyan-300 font-bold">{inputs.builtupCoverage}% ({builtUpPerFloor.toLocaleString('en-IN')} sq ft/span)</span>
               </div>
               <input
                 type="range"
@@ -143,7 +149,7 @@ export default function InputPanel({ inputs, onChangeInput, onSelectBrand }) {
               <span className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-emerald-400" /> {isInfra ? 'Pier Spans & Girder Bays' : 'Floor Levels & Rooms'}
               </span>
-              <span className="text-emerald-300 text-xs font-semibold">{inputs.totalBuiltUpArea} sq ft</span>
+              <span className="text-emerald-300 text-xs font-semibold">{totalBuiltUpArea.toLocaleString('en-IN')} sq ft</span>
             </label>
 
             <div className="grid grid-cols-2 gap-3 mb-4">
