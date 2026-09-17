@@ -84,15 +84,15 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0b132b] text-slate-100 p-3 sm:p-6 lg:p-8 font-sans selection:bg-amber-500 selection:text-slate-950">
       
-      {/* Header */}
+      {/* Header spanning full window */}
       <Header
         onExportPDF={handleExportPDF}
         onOpenGuide={() => setShowGuide(true)}
         onReset={handleReset}
       />
 
-      {/* Main Container */}
-      <main className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
+      {/* Main Full-Width Container */}
+      <main className="w-full max-w-[1800px] mx-auto space-y-6 sm:space-y-8">
         
         {/* Quick Presets */}
         <PresetBar
@@ -110,14 +110,14 @@ export default function App() {
         {/* Hero Summary Metric Cards */}
         <SummaryCards results={results} />
 
-        {/* Neat & Clean Space Between Navigation Tabs */}
-        <div className="glass-panel p-2 sm:p-3 border-amber-500/20">
-          <div className="flex items-center gap-2 sm:gap-4 overflow-x-auto scrollbar-none py-1 px-1">
+        {/* Full Window Navigation Tabs */}
+        <div className="glass-panel p-2.5 sm:p-4 border-amber-500/20">
+          <div className="flex items-center gap-3 sm:gap-4 overflow-x-auto scrollbar-none py-1">
             <button
               onClick={() => setActiveTab('breakdown')}
-              className={`flex-shrink-0 px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 flex items-center gap-2 ${
+              className={`flex-1 min-w-[200px] py-3.5 px-5 text-xs sm:text-sm font-extrabold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${
                 activeTab === 'breakdown'
-                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.02]'
+                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.01]'
                   : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-slate-100 border border-slate-800'
               }`}
             >
@@ -127,9 +127,9 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('visualizer')}
-              className={`flex-shrink-0 px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 flex items-center gap-2 ${
+              className={`flex-1 min-w-[200px] py-3.5 px-5 text-xs sm:text-sm font-extrabold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${
                 activeTab === 'visualizer'
-                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.02]'
+                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.01]'
                   : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-slate-100 border border-slate-800'
               }`}
             >
@@ -139,9 +139,9 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('charts')}
-              className={`flex-shrink-0 px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 flex items-center gap-2 ${
+              className={`flex-1 min-w-[200px] py-3.5 px-5 text-xs sm:text-sm font-extrabold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${
                 activeTab === 'charts'
-                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.02]'
+                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.01]'
                   : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-slate-100 border border-slate-800'
               }`}
             >
@@ -151,9 +151,9 @@ export default function App() {
 
             <button
               onClick={() => setActiveTab('brands')}
-              className={`flex-shrink-0 px-4 sm:px-6 py-3 text-xs sm:text-sm font-bold rounded-xl transition-all duration-200 flex items-center gap-2 ${
+              className={`flex-1 min-w-[200px] py-3.5 px-5 text-xs sm:text-sm font-extrabold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${
                 activeTab === 'brands'
-                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.02]'
+                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/25 scale-[1.01]'
                   : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-slate-100 border border-slate-800'
               }`}
             >
@@ -185,7 +185,6 @@ export default function App() {
             />
           )}
 
-          {/* Complementary preview simulator under breakdown tab */}
           {activeTab === 'breakdown' && (
             <div className="mt-8">
               <StructuralVisualizer results={results} />
@@ -207,12 +206,12 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="max-w-7xl mx-auto mt-14 pt-6 border-t border-slate-800/80 text-center text-xs text-slate-500">
+      <footer className="w-full max-w-[1800px] mx-auto mt-14 pt-6 border-t border-slate-800/80 text-center text-xs text-slate-500">
         <p className="font-semibold text-slate-400">
           Construction Matrix &copy; {new Date().getFullYear()} — Engineering Estimation Engine
         </p>
-        <p className="mt-1.5 text-[11px] text-slate-500 max-w-2xl mx-auto">
-          Calculations based on IS 456:2000, IS 1786, IS 2502, IRC 112, and IRS Concrete Bridge Code. Accessible across Mobile, Tablet, & Desktop displays.
+        <p className="mt-1.5 text-[11px] text-slate-500 max-w-3xl mx-auto">
+          Calculations based on IS 456:2000, IS 1786, IS 2502, IRC 112, and IRS Concrete Bridge Code. Full Window Responsive Display.
         </p>
       </footer>
 
